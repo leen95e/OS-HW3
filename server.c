@@ -52,6 +52,11 @@ void getargs(int *port, int* threads, int* queueSize, int* sleepTime, int argc, 
     }else{
         *sleepTime = 0;
     }
+
+    if (*threads <= 0 || *queueSize <= 0) {
+        fprintf(stderr, "Usage: %s <port> <threads> <queue_size>\n", argv[0]);
+        exit(1); // חובה לעשות exit עם שגיאה!
+}
 }
 // TODO: HW3 — Initialize thread pool and request queue
 // This server currently handles all requests in the main thread.
