@@ -1,0 +1,426 @@
+assignment: HW3 - Web Server
+course: 02340123 - Operating Systems
+
+students:
+  - id: OS-HW3
+
+tests:
+  - name: build
+    description: "Build project using make"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 0 / 0
+
+  - name: argbuffers
+    description: "invalid number of buffers"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: argport
+    description: "invalid port number"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: argthreads
+    description: "invalid number of threads"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: basic
+    description: "check if the webserver can serve requests"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: pool
+    description: "check if using a fixed size thread pool"
+    expected_output: ""
+    actual_output:   "Time delta: 1.01s"
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: locks
+    description: "sends many concurrent requests to test locking. server params: threads 8, Q_size 16. 20 clients each requesting ['/home.html', '/output.cgi?0.3', '/favicon.ico'], 5 times"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: stress_many_small_gets
+    description: "Many small GETs (home.html) concurrently"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: stress_many_posts
+    description: "Many POSTs (home.html) concurrently"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: stress_queue_pressure_sleep
+    description: "Queue pressure using valid long CGI (sleep15.cgi)"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: stress_post_while_sleep
+    description: "POSTs while long CGI requests are running"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: stress_long_run_small_gets
+    description: "Sustained small GETs for ~10 seconds"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: stress_wave_pattern
+    description: "Repeated waves: (GETs) then (POSTs) then (GETs) to catch deadlocks/leaks"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: stress_static_files_mix
+    description: "Concurrent GETs to multiple static files"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: stress_mixed_ratio_heavy
+    description: "Heavy mixed ratio of GET/POST/GET-CGI, valid requests only"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: stress_queue_small
+    description: "Small queue size under load (valid long CGI requests) to stress blocking behavior"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: stress_many_short_sessions
+    description: "Many short server sessions: start/stop repeatedly and do a few requests each time"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: stress_post_flood_after_warmup
+    description: "Warm log with GETs then flood POSTs (valid) to test log read concurrency"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: stress_alternating_bursts
+    description: "Alternating bursts of long CGI and short GETs to stress queue and worker scheduling"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: stress_concurrent_post_while_idle
+    description: "POST concurrency when server is otherwise idle (after warmup)"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: stress_long_steady
+    description: "Steady valid load for ~15 seconds (GET home + occasional POST), no timing assertions"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: stat_header_sanity
+    description: "Check Stat-* header presence and basic ordering constraints"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: per_thread_count_monotonic
+    description: "For same thread-id, thread-count should be nondecreasing across requests"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: post_log_growth
+    description: "POST body should grow after additional requests are served"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: weak_fifo_order
+    description: "Weak FIFO check using Stat-Req-Dispatch ordering (not strict)"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: queue_full_no_deadlock
+    description: "Very small queue + long CGI + some GETs should complete without deadlock"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: mega_locks
+    description: "Large threads/queue with heavy concurrent valid GET mix; should not deadlock or crash"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: writer_progress
+    description: "POST must make progress even while many GETs are spamming (no writer starvation)"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: fifo_weak
+    description: "Single-thread FIFO check using Stat-Req-Dispatch monotonicity"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: writer_priority_under_post_flood
+    description: "Writer-priority: a GET (writer) must complete even if many POST (readers) are flooding"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: error_counters_no_increment
+    description: "501/404 must increment Thread-Count but must NOT increment Static/Dynamic/Post counters"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: debug_sleep_enforced
+    description: "With debug_sleep_time>0, GET log write critical section should sleep ~that duration"
+    expected_output: ""
+    actual_output:   ""
+    result: FAIL
+    score: 0 / 1.72
+    comment: "Debug sleep not enforced: Log-Dispatch - Log-Arrival = 0.000s, expected >= 1.8s"
+
+  - name: log_format_matches_append_stats
+    description: "POST log body must be chained entries identical in format to append_stats output (CRLF lines + all Stat-* fields)"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: busy_wait_cpu_probe
+    description: "Heuristic: warn if server burns noticeable CPU while completely idle (suggests busy-wait / spin)"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: cpu_idle_no_busy_wait
+    description: "Server should not burn CPU when idle (catches busy-wait loops)"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: debug_sleep_affects_log_stats
+    description: "With debug_sleep_time>0, Stat-Log-Dispatch - Stat-Log-Arrival should reflect the sleep"
+    expected_output: ""
+    actual_output:   ""
+    result: FAIL
+    score: 0 / 1.72
+    comment: "Debug sleep seems not applied inside log CS: log_dt=0.000s, expected around 2s"
+
+  - name: error_403_counters_no_increment_dir
+    description: "403 via requesting a directory: increments Thread-Count only, not Static/Dynamic/Post"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: queue_full_master_blocks
+    description: "Queue-full behavior: with threads=1,q=1 the 3rd request should not be accepted until space frees"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: fifo_order_strong
+    description: "Stronger FIFO: for a burst of requests, dispatch order should follow arrival order (queue FIFO)"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: queue_lock_released_during_processing
+    description: "While one worker runs long CGI, other requests should still be accepted/served (queue lock not held during processing)"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: stat_time_format_exact
+    description: "Stat-* time headers must be formatted as seconds.microseconds with exactly 6 digits"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: post_body_excludes_current_post
+    description: "POST body excludes the current POST entry; per-thread Stat-Thread-Post is inclusive (force 1 thread)"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: dynamic_counter_increments_on_cgi
+    description: "Valid CGI request increments Dynamic counter (and not Static/Post)"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: post_before_any_get
+    description: "POST before any GET should succeed and return a (possibly empty) body without crashing"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: debug_sleep_enforced_post
+    description: "With debug_sleep_time>0, POST (log reader) critical section should sleep ~that duration"
+    expected_output: ""
+    actual_output:   ""
+    result: FAIL
+    score: 0 / 1.72
+    comment: "Debug sleep not enforced for POST reader: Log-Dispatch - Log-Arrival = 0.000s, expected >= 1.8s"
+
+  - name: debug_sleep_readers_concurrent
+    description: "With debug_sleep_time>0, multiple POST readers should run concurrently (total wall time ~sleep, not N*sleep)"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: thread_id_range
+    description: "Stat-Thread-Id must be between 1 and threads (inclusive)"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: writer_priority_under_reader_flood
+    description: "If a writer (GET) is waiting, readers (POST) should not keep entering; writer must get served"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: fifo_by_dispatch_times_single_worker
+    description: "With threads=1, dispatch times should follow request acceptance order (FIFO)"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: post_body_contains_multiple_log_entries
+    description: "After multiple valid GETs, POST response body should include multiple logged stat entries"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: writer_priority_no_reader_barge
+    description: "Once a GET writer is waiting, a later POST should not barge ahead (writer priority)"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: queue_counts_active_plus_pending
+    description: "queue_size should cap total accepted connections (pending + active) as hinted in spec"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: stats_time_monotonicity
+    description: "Sanity: Req-Arrival <= Req-Dispatch <= Log-Arrival <= Log-Dispatch for a normal request"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: error_does_not_increment_type_counters
+    description: "404/403/501 should not increment static/dynamic/post counters (but should increment total count)"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: post_blocks_behind_writer
+    description: "If a writer is inside log CS (debug sleep), a POST must wait (should not complete too fast)"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: mixed_load_no_deadlock
+    description: "Stress: mixed GET/POST/dynamic in parallel should complete (no deadlock)"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: large_log_post_not_truncated
+    description: "After many GETs, POST should return a large body containing many log entries (no truncation/crash)"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: worker_wakeup_from_empty_queue
+    description: "After idle period (empty queue), a request should be served promptly (workers waiting on CV)"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+  - name: stress_mixed_200_no_deadlock
+    description: "Stress: 200 mixed GET/POST/dynamic under debug sleep should complete (deadlock hunter)"
+    expected_output: ""
+    actual_output:   ""
+    result: PASS
+    score: 1.72 / 1.72
+
+summary:
+  total_score: 94.59999999999995 / 99.75999999999995
+  percentage: 94.8%

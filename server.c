@@ -24,8 +24,8 @@ typedef struct{
 typedef struct{
     queue_t* queue;
     int* workingRequests;
-    int id;
     server_log log;
+    threads_stats t;
 } thread_args;
 
 
@@ -71,26 +71,22 @@ void getargs(int *port, int* threads, int* queueSize, int* sleepTime, int argc, 
 // You must implement a thread pool (fixed number of worker threads)
 // that process requests from a synchronized queue.
 
+int curSize(queue_t* q){
+    return q->pendingRequest;
+}
 
 void* workerThread(void* arg) {
-    thread_args* args = arg;
+    thread_args* args = (thread_args*)arg;
 
     queue_t* q = args->queue;
     int* wr = args->workingRequests;
-    int id = args->id;
     server_log log =  args->log;
+    threads_stats stats_t = (threads_stats)args->t;
     free(arg);
-
-    threads_stats t = malloc(sizeof(struct Threads_stats));
-    t->id = id;
-    t->stat_req = 0;
-    t->dynm_req = 0;
-    t->post_req = 0;
-    t->total_req = 0;
     
     while(1){
         pthread_mutex_lock(&mutex);
-        while(q->pendingRequest == 0){
+        while(curSize(q) == 0){
             pthread_cond_wait(&isEmpty, &mutex);
         }
         job_t* job = q->jobsArray[q->head];
@@ -98,14 +94,17 @@ void* workerThread(void* arg) {
         q->pendingRequest--;
         
         (*wr)++;
-        time_stats timeStats;
-        timeStats.task_arrival = job->arrivalTime;
-        gettimeofday(&timeStats.task_dispatch, NULL);
+        struct timeval dispatch_time;
+
+        gettimeofday(&dispatch_time, NULL);
 
         pthread_mutex_unlock(&mutex);
 
+        time_stats ts;
+        ts.task_dispatch = dispatch_time;
+        ts.task_arrival = job->arrivalTime;
         
-        requestHandle(job->connfd, timeStats, t, log);
+        requestHandle(job->connfd, ts, stats_t, log);
 
         pthread_mutex_lock(&mutex);
         Close(job->connfd);
@@ -114,8 +113,11 @@ void* workerThread(void* arg) {
         pthread_cond_signal(&isFull);
         pthread_mutex_unlock(&mutex);
     }
-    return NULL;
+    pthread_exit(NULL);
 }
+
+
+
 
 
 int main(int argc, char *argv[])
@@ -135,29 +137,41 @@ int main(int argc, char *argv[])
 
     queue_t queue;
 
+   
+    pthread_t* workerHandles = malloc(sizeof(pthread_t) * threadsCount);
+    
+    if (workerHandles == NULL){
+        fprintf(stderr, "malloc failed");
+        exit(1);
+    }
+
     queue.capacity = queueSize;
     queue.jobsArray= malloc(sizeof(job_t*)*queueSize);
     queue.head = 0;
     queue.tail = 0;
     queue.pendingRequest = 0;
     
-    pthread_t* workerHandles = malloc(sizeof(pthread_t) * threadsCount);
-
-    if (workerHandles == NULL){
-        fprintf(stderr, "malloc failed");
-        exit(1);
-    }
-    for (int i = 0; i < threadsCount; i++){
-        int id = i + 1;
+    for (unsigned int i = 0; i < threadsCount; i++){
         thread_args* args = malloc(sizeof(thread_args));
         if (args == NULL){
             fprintf(stderr, "malloc failed");
             exit(1);
         }
+        threads_stats stats = (threads_stats)malloc(sizeof(struct Threads_stats));
+        if(stats == NULL){
+            fprintf(stderr, "malloc failed");
+            exit(1);
+        }
+        stats->id = i + 1;             // Thread ID (placeholder)
+        stats->stat_req = 0;       // Static request count
+        stats->dynm_req = 0;       // Dynamic request count
+        stats->post_req = 0;        // Post request count
+        stats->total_req = 0; 
+             // Total request count
         args->queue = &queue;
-        args->id = id;
         args->workingRequests = &workingRequest;
         args->log = request_log;
+        args->t = stats;
         pthread_create(&workerHandles[i], NULL, workerThread, (void*)args);
     }
 
@@ -167,14 +181,15 @@ int main(int argc, char *argv[])
         clientlen = sizeof(clientaddr);
         connfd = Accept(listenfd, (SA *)&clientaddr, (socklen_t*) &clientlen);
 
-        
-        pthread_mutex_lock(&mutex);
-
-        while((workingRequest + queue.pendingRequest) >= queue.capacity){
-            pthread_cond_wait(&isFull, &mutex);
-        }
         struct timeval arrival;
         gettimeofday(&arrival, NULL);
+
+        pthread_mutex_lock(&mutex);
+
+        while((workingRequest + curSize(&queue)) >= queue.capacity){
+            pthread_cond_wait(&isFull, &mutex);
+        }
+        
         job_t* new_job = malloc(sizeof(job_t));
         if (new_job == NULL){
             fprintf(stderr, "malloc failed");
@@ -211,4 +226,3 @@ int main(int argc, char *argv[])
 
     // TODO: HW3 — Add cleanup code for thread pool and queue
 }
-

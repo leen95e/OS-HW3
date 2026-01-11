@@ -1,0 +1,1026 @@
+
+============================================================
+======================= TEST: BUILD ========================
+============================================================
+Cleaning project...
+Executing utility: make clean
+rm -f server.o request.o segel.o client.o log.o server client output.cgi
+rm -rf public
+Executing 'make' in /home/student/Desktop/testing_suite/extracted_subs/OS-HW3
+Executing utility: make
+gcc -g -Wall -o server.o -c server.c
+gcc -g -Wall -o request.o -c request.c
+gcc -g -Wall -o segel.o -c segel.c
+gcc -g -Wall -o log.o -c log.c
+gcc -g -Wall -o server server.o request.o segel.o log.o -lpthread
+gcc -g -Wall -o client.o -c client.c
+gcc -g -Wall -o client client.o segel.o
+gcc -g -Wall -o output.cgi output.c
+mkdir -p public
+cp output.cgi favicon.ico home.html public
+Build successful!
+
+============================================================
+===================== TEST: ARGBUFFERS =====================
+============================================================
+Starting server on port 6584
+Usage: /home/student/Desktop/testing_suite/extracted_subs/OS-HW3/server <port> <threads> <queue_size>
+[DEBUG] Affinity set for PID 61001 to cores {0, 1, 2, 3, 4, 5, 6}
+Server exited as expected (Code: 1)
+
+============================================================
+====================== TEST: ARGPORT =======================
+============================================================
+Starting server on port 22
+Invalid port number[DEBUG] Affinity set for PID 61004 to cores {0, 1, 2, 3, 4, 5, 6}
+Server exited as expected (Code: 1)
+
+============================================================
+===================== TEST: ARGTHREADS =====================
+============================================================
+Starting server on port 6234
+Usage: /home/student/Desktop/testing_suite/extracted_subs/OS-HW3/server <port> <threads> <queue_size>
+[DEBUG] Affinity set for PID 61007 to cores {0, 1, 2, 3, 4, 5, 6}
+Server exited as expected (Code: 1)
+
+============================================================
+================== TEST: ARGTHREADS_ZERO ===================
+============================================================
+Starting server on port 6695
+Usage: /home/student/Desktop/testing_suite/extracted_subs/OS-HW3/server <port> <threads> <queue_size>
+[DEBUG] Affinity set for PID 61010 to cores {0, 1, 2, 3, 4, 5, 6}
+Server exited as expected (Code: 1)
+
+============================================================
+================== TEST: ARGBUFFERS_ZERO ===================
+============================================================
+Starting server on port 7120
+Usage: /home/student/Desktop/testing_suite/extracted_subs/OS-HW3/server <port> <threads> <queue_size>
+[DEBUG] Affinity set for PID 61013 to cores {0, 1, 2, 3, 4, 5, 6}
+Server exited as expected (Code: 1)
+
+============================================================
+======================= TEST: BASIC ========================
+============================================================
+Starting server on port 7955
+[DEBUG] Affinity set for PID 61017 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+===================== TEST: BASIC_POST =====================
+============================================================
+Starting server on port 5536
+[DEBUG] Affinity set for PID 61021 to cores {0, 1, 2, 3, 4, 5, 6}
+POST response length: 0 bytes
+
+============================================================
+=================== TEST: BASIC_DYNAMIC ====================
+============================================================
+Starting server on port 9331
+[DEBUG] Affinity set for PID 61025 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+===================== TEST: ERROR_404 ======================
+============================================================
+Starting server on port 7686
+[DEBUG] Affinity set for PID 61030 to cores {0, 1, 2, 3, 4, 5, 6}
+v 404 error returned correctly
+
+============================================================
+===================== TEST: ERROR_501 ======================
+============================================================
+Starting server on port 8907
+[DEBUG] Affinity set for PID 61034 to cores {0, 1, 2, 3, 4, 5, 6}
+v 501 error returned correctly
+
+============================================================
+======================== TEST: POOL ========================
+============================================================
+Starting server on port 7402
+[DEBUG] Affinity set for PID 61038 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+===================== TEST: POOL_EXACT =====================
+============================================================
+Starting server on port 8925
+[DEBUG] Affinity set for PID 61047 to cores {0, 1, 2, 3, 4, 5, 6}
+6 requests with 3 threads took 2.03s
+v Thread pool size verified
+
+============================================================
+=================== TEST: STATS_PRESENT ====================
+============================================================
+Starting server on port 8229
+[DEBUG] Affinity set for PID 61065 to cores {0, 1, 2, 3, 4, 5, 6}
+v All required statistics headers present
+
+============================================================
+==================== TEST: STATS_ERROR =====================
+============================================================
+Starting server on port 9007
+[DEBUG] Affinity set for PID 61070 to cores {0, 1, 2, 3, 4, 5, 6}
+Stats - Total: 1, Static: 0, Dynamic: 0, Post: 0
+v 404 Error Logic Correct
+
+============================================================
+===================== TEST: STATS_501 ======================
+============================================================
+Starting server on port 5166
+[DEBUG] Affinity set for PID 61075 to cores {0, 1, 2, 3, 4, 5, 6}
+v 501 Error Logic Correct
+
+============================================================
+=================== TEST: STATS_ACCURACY ===================
+============================================================
+Starting server on port 8395
+[DEBUG] Affinity set for PID 61080 to cores {0, 1, 2, 3, 4, 5, 6}
+v Stats Accuracy: Post count is 1
+
+============================================================
+=================== TEST: DYNAMIC_STATS ====================
+============================================================
+Starting server on port 6865
+[DEBUG] Affinity set for PID 61085 to cores {0, 1, 2, 3, 4, 5, 6}
+v Dynamic Stats Correct
+
+============================================================
+================== TEST: STATS_THREAD_ID ===================
+============================================================
+Starting server on port 9435
+[DEBUG] Affinity set for PID 61091 to cores {0, 1, 2, 3, 4, 5, 6}
+Seen thread IDs: {1, 2, 3, 4}
+v Thread IDs are valid
+
+============================================================
+=============== TEST: STATS_THREAD_COUNTING ================
+============================================================
+Starting server on port 5887
+[DEBUG] Affinity set for PID 61098 to cores {0, 1, 2, 3, 4, 5, 6}
+v Thread counting is correct
+
+============================================================
+================== TEST: LOG_TIMER_LOGIC ===================
+============================================================
+Starting server on port 7599
+[DEBUG] Affinity set for PID 61102 to cores {0, 1, 2, 3, 4, 5, 6}
+B Stats: Arrival=1768148280.517216, Dispatch=1768148281.418581, Wait=0.9014s
+v Log Timers correctly capture lock wait duration
+
+============================================================
+================== TEST: REQ_TIMER_LOGIC ===================
+============================================================
+Starting server on port 8777
+[DEBUG] Affinity set for PID 61109 to cores {0, 1, 2, 3, 4, 5, 6}
+B Stats: Arrival=1768148282.785799, Dispatch=1768148283.686237, QueueWait=0.9004s
+v Req Timers correctly capture queue wait time
+
+============================================================
+================== TEST: PARALLEL_READERS ==================
+============================================================
+Starting server on port 9756
+[DEBUG] Affinity set for PID 61115 to cores {0, 1, 2, 3, 4, 5, 6}
+Launching 3 Parallel POST requests (Readers)...
+3 Readers finished in 2.02s
+v Parallel Readers confirmed
+
+============================================================
+================== TEST: WRITER_EXCLUSIVE ==================
+============================================================
+Starting server on port 8342
+[DEBUG] Affinity set for PID 61125 to cores {0, 1, 2, 3, 4, 5, 6}
+Launching 2 GET requests (Writers)...
+2 Writers finished in 2.01s
+v Writers have exclusive access
+
+============================================================
+================== TEST: WRITER_PRIORITY ===================
+============================================================
+Starting server on port 7652
+[DEBUG] Affinity set for PID 61134 to cores {0, 1, 2, 3, 4, 5, 6}
+Launching Priority Race...
+v Priority Success: W2 ended at 1768148291.49, R1 at 1768148292.49
+
+============================================================
+================= TEST: WRITER_STARVATION ==================
+============================================================
+Starting server on port 9722
+[DEBUG] Affinity set for PID 61144 to cores {0, 1, 2, 3, 4, 5, 6}
+v Priority Success: Writer finished at 1768148294.76, Reader at 1768148295.76
+
+============================================================
+=================== TEST: RW_CONCURRENCY ===================
+============================================================
+Starting server on port 9479
+[DEBUG] Affinity set for PID 61158 to cores {0, 1, 2, 3, 4, 5, 6}
+v Parallel Readers verified (2.01s)
+
+============================================================
+===================== TEST: QUEUE_FIFO =====================
+============================================================
+Starting server on port 5936
+[DEBUG] Affinity set for PID 61168 to cores {0, 1, 2, 3, 4, 5, 6}
+v FIFO order verified
+
+============================================================
+================== TEST: MASTER_BLOCKING ===================
+============================================================
+Starting server on port 8760
+[DEBUG] Affinity set for PID 61175 to cores {0, 1, 2, 3, 4, 5, 6}
+Flooding small queue (Size=1)...
+v All requests handled successfully (Master blocked and resumed)
+
+============================================================
+==================== TEST: QUEUE_STRESS ====================
+============================================================
+Starting server on port 6854
+[DEBUG] Affinity set for PID 61182 to cores {0, 1, 2, 3, 4, 5, 6}
+Spawning 10 concurrent clients (Threads=3)...
+10 requests finished in 10.03s
+
+============================================================
+=================== TEST: LOG_DELIMITER ====================
+============================================================
+Starting server on port 6351
+[DEBUG] Affinity set for PID 61198 to cores {0, 1, 2, 3, 4, 5, 6}
+Log entries found: 2
+v Log entries properly separated with newlines
+
+============================================================
+==================== TEST: LOG_CONTENT =====================
+============================================================
+Starting server on port 9793
+[DEBUG] Affinity set for PID 61203 to cores {0, 1, 2, 3, 4, 5, 6}
+v Log content contains all required statistics
+
+============================================================
+===================== TEST: LOG_GROWTH =====================
+============================================================
+Starting server on port 7127
+[DEBUG] Affinity set for PID 61208 to cores {0, 1, 2, 3, 4, 5, 6}
+v Log grew correctly to 5 entries
+
+============================================================
+===================== TEST: MIME_TYPES =====================
+============================================================
+Starting server on port 6267
+[DEBUG] Affinity set for PID 61213 to cores {0, 1, 2, 3, 4, 5, 6}
+v MIME types checked
+
+============================================================
+======================= TEST: LOCKS ========================
+============================================================
+Starting server on port 7373
+[DEBUG] Affinity set for PID 61217 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+====================== TEST: MIXED_RW ======================
+============================================================
+Starting server on port 7592
+[DEBUG] Affinity set for PID 61348 to cores {0, 1, 2, 3, 4, 5, 6}
+v Mixed readers and writers handled correctly
+
+============================================================
+=================== TEST: RACE_CONDITION ===================
+============================================================
+Starting server on port 6694
+[DEBUG] Affinity set for PID 61385 to cores {0, 1, 2, 3, 4, 5, 6}
+Launching 100 rapid requests (10 threads x 10 requests)...
+Completed 100 requests
+v No race conditions detected
+
+============================================================
+=================== TEST: DEBUG_ENABLED ====================
+============================================================
+Starting server on port 7763
+[DEBUG] Affinity set for PID 61406 to cores {0, 1, 2, 3, 4, 5, 6}
+Request took 2.01s with debug=2
+v Debug mode adds sleep as expected
+
+============================================================
+=================== TEST: DEBUG_DISABLED ===================
+============================================================
+Starting server on port 8528
+[DEBUG] Affinity set for PID 61410 to cores {0, 1, 2, 3, 4, 5, 6}
+Request took 0.01s with debug=0
+v No artificial delay without debug mode
+
+============================================================
+===================== TEST: EMPTY_LOG ======================
+============================================================
+Starting server on port 9060
+[DEBUG] Affinity set for PID 61414 to cores {0, 1, 2, 3, 4, 5, 6}
+Fresh log size: 0 bytes
+v Empty log test passed
+
+============================================================
+================== TEST: MULTIPLE_CLIENTS ==================
+============================================================
+Starting server on port 8854
+[DEBUG] Affinity set for PID 61418 to cores {0, 1, 2, 3, 4, 5, 6}
+v 10 sequential requests succeeded
+
+============================================================
+==================== TEST: LARGE_QUEUE =====================
+============================================================
+Starting server on port 5097
+[DEBUG] Affinity set for PID 61423 to cores {0, 1, 2, 3, 4, 5, 6}
+v Large queue handled correctly
+
+============================================================
+==================== TEST: SMALL_QUEUE =====================
+============================================================
+Starting server on port 8128
+[DEBUG] Affinity set for PID 61478 to cores {0, 1, 2, 3, 4, 5, 6}
+v Minimal queue (1,1) works correctly
+
+============================================================
+================ TEST: ACCEPT_OUTSIDE_LOCK =================
+============================================================
+Starting server on port 8044
+[DEBUG] Affinity set for PID 61482 to cores {0, 1, 2, 3, 4, 5, 6}
+v Accept() appears to be outside lock (no deadlock)
+
+============================================================
+================= TEST: STATS_CONSISTENCY ==================
+============================================================
+Starting server on port 5368
+[DEBUG] Affinity set for PID 61489 to cores {0, 1, 2, 3, 4, 5, 6}
+Final stats - Total: 3, Static: 1, Dynamic: 1, Post: 1
+v Statistics are consistent
+
+============================================================
+==================== TEST: TIMING_ORDER ====================
+============================================================
+Starting server on port 7738
+[DEBUG] Affinity set for PID 61495 to cores {0, 1, 2, 3, 4, 5, 6}
+Req: Arrival=1768148339.008272, Dispatch=1768148339.008715
+Log: Arrival=1768148339.009803, Dispatch=1768148339.009831
+v Timing statistics are in correct order
+
+============================================================
+======================= TEST: LOCKS2 =======================
+============================================================
+Starting server on port 5688
+[DEBUG] Affinity set for PID 61500 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+===================== TEST: LOCKS_HARD =====================
+============================================================
+Starting server on port 9084
+[DEBUG] Affinity set for PID 61517 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+======================= TEST: LOCKS3 =======================
+============================================================
+Starting server on port 9172
+[DEBUG] Affinity set for PID 62086 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+======================= TEST: LOCKS4 =======================
+============================================================
+Starting server on port 6162
+[DEBUG] Affinity set for PID 62127 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+======================= TEST: EQUAL ========================
+============================================================
+Starting server on port 8912
+[DEBUG] Affinity set for PID 62152 to cores {0, 1, 2, 3, 4, 5, 6}
+v Equal threads/buffers test passed
+
+============================================================
+======================= TEST: EQUAL2 =======================
+============================================================
+Starting server on port 6315
+[DEBUG] Affinity set for PID 62180 to cores {0, 1, 2, 3, 4, 5, 6}
+v Equal2 threads/buffers test passed
+
+============================================================
+======================= TEST: EQUAL3 =======================
+============================================================
+Starting server on port 9924
+[DEBUG] Affinity set for PID 62231 to cores {0, 1, 2, 3, 4, 5, 6}
+v Equal3 minimal config (1,1) passed
+
+============================================================
+======================= TEST: FEWER ========================
+============================================================
+Starting server on port 6006
+[DEBUG] Affinity set for PID 62235 to cores {0, 1, 2, 3, 4, 5, 6}
+v Fewer threads test passed
+
+============================================================
+======================= TEST: FEWER2 =======================
+============================================================
+Starting server on port 9481
+[DEBUG] Affinity set for PID 62265 to cores {0, 1, 2, 3, 4, 5, 6}
+v Fewer2 threads test passed
+
+============================================================
+======================= TEST: FEWER3 =======================
+============================================================
+Starting server on port 8168
+[DEBUG] Affinity set for PID 62322 to cores {0, 1, 2, 3, 4, 5, 6}
+v Fewer3 threads test passed
+
+============================================================
+======================= TEST: LIGHT ========================
+============================================================
+Starting server on port 7009
+[DEBUG] Affinity set for PID 62340 to cores {0, 1, 2, 3, 4, 5, 6}
+v Light load test passed
+
+============================================================
+======================= TEST: LIGHT2 =======================
+============================================================
+Starting server on port 5153
+[DEBUG] Affinity set for PID 62351 to cores {0, 1, 2, 3, 4, 5, 6}
+v Light2 mixed load test passed
+
+============================================================
+======================= TEST: SINGLE =======================
+============================================================
+Starting server on port 6366
+[DEBUG] Affinity set for PID 62358 to cores {0, 1, 2, 3, 4, 5, 6}
+v Single thread test passed
+
+============================================================
+===================== TEST: NOBUSYWAIT =====================
+============================================================
+Starting server on port 7019
+[DEBUG] Affinity set for PID 62362 to cores {0, 1, 2, 3, 4, 5, 6}
+v No busy wait test passed (server responsive after idle)
+
+============================================================
+================== TEST: STATS_ALL_COUNT ===================
+============================================================
+Starting server on port 8088
+[DEBUG] Affinity set for PID 62369 to cores {0, 1, 2, 3, 4, 5, 6}
+Stats: Total=3, Static=1, Dynamic=1, Post=1
+v All counts test passed
+
+============================================================
+================ TEST: STATS_DISPATCH_TIME =================
+============================================================
+Starting server on port 9762
+[DEBUG] Affinity set for PID 62379 to cores {0, 1, 2, 3, 4, 5, 6}
+Wait times: ['0.000', '0.901', '1.800']
+v Dispatch time test passed
+
+============================================================
+===================== TEST: LOG_BASIC ======================
+============================================================
+Starting server on port 7091
+[DEBUG] Affinity set for PID 62386 to cores {0, 1, 2, 3, 4, 5, 6}
+Log size: 253 bytes
+v Log basic test passed
+
+============================================================
+====================== TEST: LOG_HUGE ======================
+============================================================
+Starting server on port 6137
+[DEBUG] Affinity set for PID 62391 to cores {0, 1, 2, 3, 4, 5, 6}
+Log contains 100 entries
+v Log huge test passed
+
+============================================================
+=================== TEST: LOG_CONCURRENT ===================
+============================================================
+Starting server on port 9826
+[DEBUG] Affinity set for PID 62398 to cores {0, 1, 2, 3, 4, 5, 6}
+Log contains 50 entries after concurrent writes
+v Log concurrent test passed
+
+============================================================
+====================== TEST: LOG_PRIO ======================
+============================================================
+Starting server on port 9260
+[DEBUG] Affinity set for PID 62459 to cores {0, 1, 2, 3, 4, 5, 6}
+v Writer finished before second reader (priority works)
+
+============================================================
+================== TEST: ORIG_ARGBUFFERS ===================
+============================================================
+Starting server on port 7119
+Usage: /home/student/Desktop/testing_suite/extracted_subs/OS-HW3/server <port> <threads> <queue_size>
+[DEBUG] Affinity set for PID 62470 to cores {0, 1, 2, 3, 4, 5, 6}
+Server exited as expected (Code: 1)
+
+============================================================
+==================== TEST: ORIG_ARGPORT ====================
+============================================================
+Starting server on port 22
+Invalid port number[DEBUG] Affinity set for PID 62473 to cores {0, 1, 2, 3, 4, 5, 6}
+Server exited as expected (Code: 1)
+
+============================================================
+================== TEST: ORIG_ARGTHREADS ===================
+============================================================
+Starting server on port 7028
+Usage: /home/student/Desktop/testing_suite/extracted_subs/OS-HW3/server <port> <threads> <queue_size>
+[DEBUG] Affinity set for PID 62476 to cores {0, 1, 2, 3, 4, 5, 6}
+Server exited as expected (Code: 1)
+
+============================================================
+===================== TEST: ORIG_BASIC =====================
+============================================================
+Starting server on port 8902
+[DEBUG] Affinity set for PID 62480 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+===================== TEST: ORIG_POOL ======================
+============================================================
+Starting server on port 9082
+[DEBUG] Affinity set for PID 62484 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+===================== TEST: ORIG_LOCKS =====================
+============================================================
+Starting server on port 7974
+[DEBUG] Affinity set for PID 62493 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+================== TEST: ORIG_STATS_ERROR ==================
+============================================================
+Starting server on port 7234
+[DEBUG] Affinity set for PID 62624 to cores {0, 1, 2, 3, 4, 5, 6}
+Stats - Total: 1, Static: 0, Post: 0
+v 404 Error Logic Correct.
+
+============================================================
+================ TEST: ORIG_STATS_ACCURACY =================
+============================================================
+Starting server on port 9725
+[DEBUG] Affinity set for PID 62629 to cores {0, 1, 2, 3, 4, 5, 6}
+v Stats Accuracy: Post count is 1
+
+============================================================
+================= TEST: ORIG_QUEUE_STRESS ==================
+============================================================
+Starting server on port 5536
+[DEBUG] Affinity set for PID 62634 to cores {0, 1, 2, 3, 4, 5, 6}
+Spawning 10 concurrent clients (Threads=3)...
+10 requests finished in 10.02s
+
+============================================================
+================= TEST: ORIG_LOG_DELIMITER =================
+============================================================
+Starting server on port 6365
+[DEBUG] Affinity set for PID 62650 to cores {0, 1, 2, 3, 4, 5, 6}
+Log entries found: 2
+v Log content retrieved successfully.
+
+============================================================
+================ TEST: ORIG_WRITER_PRIORITY ================
+============================================================
+Starting server on port 7645
+[DEBUG] Affinity set for PID 62655 to cores {0, 1, 2, 3, 4, 5, 6}
+Launching Priority Race...
+v Priority Success: W2 (1768148381.95) < R1 (1768148382.95)
+
+============================================================
+================= TEST: ORIG_DYNAMIC_STATS =================
+============================================================
+Starting server on port 5620
+[DEBUG] Affinity set for PID 62665 to cores {0, 1, 2, 3, 4, 5, 6}
+v Dynamic Stats Correct.
+
+============================================================
+=============== TEST: ORIG_PARALLEL_READERS ================
+============================================================
+Starting server on port 8279
+[DEBUG] Affinity set for PID 62671 to cores {0, 1, 2, 3, 4, 5, 6}
+Launching 3 Parallel POST requests (Readers)...
+3 Readers finished in 2.02s
+v Parallel Readers confirmed.
+
+============================================================
+================ TEST: ORIG_MASTER_BLOCKING ================
+============================================================
+Starting server on port 8706
+[DEBUG] Affinity set for PID 62681 to cores {0, 1, 2, 3, 4, 5, 6}
+Flooding small queue (Size=1)...
+v All requests handled successfully (Master blocked and resumed).
+
+============================================================
+================ TEST: ORIG_LOG_TIMER_LOGIC ================
+============================================================
+Starting server on port 6862
+[DEBUG] Affinity set for PID 62688 to cores {0, 1, 2, 3, 4, 5, 6}
+B Stats: Arrival=1768148392.268589, Dispatch=1768148393.170262, Wait=0.9016730785369873
+v Log Timers correctly capture lock wait duration.
+
+============================================================
+=============== TEST: ORIG_WRITER_STARVATION ===============
+============================================================
+Starting server on port 7646
+[DEBUG] Affinity set for PID 62695 to cores {0, 1, 2, 3, 4, 5, 6}
+v Priority Success: Writer finished at 1768148396.44, Reader at 1768148397.44
+
+============================================================
+================== TEST: ORIG_MIME_TYPES ===================
+============================================================
+Starting server on port 8113
+[DEBUG] Affinity set for PID 62707 to cores {0, 1, 2, 3, 4, 5, 6}
+v MIME types checked.
+
+============================================================
+================== TEST: ORIG_QUEUE_FIFO ===================
+============================================================
+Starting server on port 7634
+[DEBUG] Affinity set for PID 62711 to cores {0, 1, 2, 3, 4, 5, 6}
+v FIFO order verified.
+
+============================================================
+================ TEST: ORIG_RW_CONCURRENCY =================
+============================================================
+Starting server on port 7555
+[DEBUG] Affinity set for PID 62717 to cores {0, 1, 2, 3, 4, 5, 6}
+v Parallel Readers verified (2.01s).
+
+============================================================
+======================= TEST: BUILD ========================
+============================================================
+Cleaning project...
+Executing utility: make clean
+rm -f server.o request.o segel.o client.o log.o server client output.cgi
+rm -rf public
+Executing 'make' in /home/student/Desktop/testing_suite/extracted_subs/OS-HW3
+Executing utility: make
+gcc -g -Wall -o server.o -c server.c
+gcc -g -Wall -o request.o -c request.c
+gcc -g -Wall -o segel.o -c segel.c
+gcc -g -Wall -o log.o -c log.c
+gcc -g -Wall -o server server.o request.o segel.o log.o -lpthread
+gcc -g -Wall -o client.o -c client.c
+gcc -g -Wall -o client client.o segel.o
+gcc -g -Wall -o output.cgi output.c
+mkdir -p public
+cp output.cgi favicon.ico home.html public
+Build successful!
+
+============================================================
+===================== TEST: ARGBUFFERS =====================
+============================================================
+Starting server on port 7121
+Usage: /home/student/Desktop/testing_suite/extracted_subs/OS-HW3/server <port> <threads> <queue_size>
+[DEBUG] Affinity set for PID 63250 to cores {0, 1, 2, 3, 4, 5, 6}
+Server exited as expected (Code: 1)
+
+============================================================
+====================== TEST: ARGPORT =======================
+============================================================
+Starting server on port 22
+Invalid port number[DEBUG] Affinity set for PID 63253 to cores {0, 1, 2, 3, 4, 5, 6}
+Server exited as expected (Code: 1)
+
+============================================================
+===================== TEST: ARGTHREADS =====================
+============================================================
+Starting server on port 7540
+Usage: /home/student/Desktop/testing_suite/extracted_subs/OS-HW3/server <port> <threads> <queue_size>
+[DEBUG] Affinity set for PID 63256 to cores {0, 1, 2, 3, 4, 5, 6}
+Server exited as expected (Code: 1)
+
+============================================================
+======================= TEST: BASIC ========================
+============================================================
+Starting server on port 6760
+[DEBUG] Affinity set for PID 63259 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+======================== TEST: POOL ========================
+============================================================
+Starting server on port 5304
+[DEBUG] Affinity set for PID 63263 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+======================= TEST: LOCKS ========================
+============================================================
+Starting server on port 5213
+[DEBUG] Affinity set for PID 63272 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+=============== TEST: STRESS_MANY_SMALL_GETS ===============
+============================================================
+Starting server on port 7310
+[DEBUG] Affinity set for PID 63403 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+================= TEST: STRESS_MANY_POSTS ==================
+============================================================
+Starting server on port 5484
+[DEBUG] Affinity set for PID 63610 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+============ TEST: STRESS_QUEUE_PRESSURE_SLEEP =============
+============================================================
+Starting server on port 6835
+[DEBUG] Affinity set for PID 63702 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+============== TEST: STRESS_POST_WHILE_SLEEP ===============
+============================================================
+Starting server on port 7524
+[DEBUG] Affinity set for PID 63729 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+============= TEST: STRESS_LONG_RUN_SMALL_GETS =============
+============================================================
+Starting server on port 5118
+[DEBUG] Affinity set for PID 63784 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+================ TEST: STRESS_WAVE_PATTERN =================
+============================================================
+Starting server on port 9948
+[DEBUG] Affinity set for PID 63799 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+============== TEST: STRESS_STATIC_FILES_MIX ===============
+============================================================
+Starting server on port 8276
+[DEBUG] Affinity set for PID 64646 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+============== TEST: STRESS_MIXED_RATIO_HEAVY ==============
+============================================================
+Starting server on port 8477
+[DEBUG] Affinity set for PID 64815 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+================= TEST: STRESS_QUEUE_SMALL =================
+============================================================
+Starting server on port 8951
+[DEBUG] Affinity set for PID 65014 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+============= TEST: STRESS_MANY_SHORT_SESSIONS =============
+============================================================
+Starting server on port 6971
+[DEBUG] Affinity set for PID 65033 to cores {0, 1, 2, 3, 4, 5, 6}
+Starting server on port 8298
+[DEBUG] Affinity set for PID 65057 to cores {0, 1, 2, 3, 4, 5, 6}
+Starting server on port 6286
+[DEBUG] Affinity set for PID 65081 to cores {0, 1, 2, 3, 4, 5, 6}
+Starting server on port 8798
+[DEBUG] Affinity set for PID 65105 to cores {0, 1, 2, 3, 4, 5, 6}
+Starting server on port 6614
+[DEBUG] Affinity set for PID 65129 to cores {0, 1, 2, 3, 4, 5, 6}
+Starting server on port 9995
+[DEBUG] Affinity set for PID 65153 to cores {0, 1, 2, 3, 4, 5, 6}
+Starting server on port 7452
+[DEBUG] Affinity set for PID 65177 to cores {0, 1, 2, 3, 4, 5, 6}
+Starting server on port 5301
+[DEBUG] Affinity set for PID 65201 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+=========== TEST: STRESS_POST_FLOOD_AFTER_WARMUP ===========
+============================================================
+Starting server on port 7840
+[DEBUG] Affinity set for PID 65227 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+============= TEST: STRESS_ALTERNATING_BURSTS ==============
+============================================================
+Starting server on port 8948
+[DEBUG] Affinity set for PID 65416 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+========= TEST: STRESS_CONCURRENT_POST_WHILE_IDLE ==========
+============================================================
+Starting server on port 5601
+[DEBUG] Affinity set for PID 65703 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+================= TEST: STRESS_LONG_STEADY =================
+============================================================
+Starting server on port 9765
+[DEBUG] Affinity set for PID 65800 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+================= TEST: STAT_HEADER_SANITY =================
+============================================================
+Starting server on port 5778
+[DEBUG] Affinity set for PID 65821 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+============= TEST: PER_THREAD_COUNT_MONOTONIC =============
+============================================================
+Starting server on port 5611
+[DEBUG] Affinity set for PID 65826 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+================== TEST: POST_LOG_GROWTH ===================
+============================================================
+Starting server on port 9993
+[DEBUG] Affinity set for PID 65830 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+================== TEST: WEAK_FIFO_ORDER ===================
+============================================================
+Starting server on port 9809
+[DEBUG] Affinity set for PID 65850 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+=============== TEST: QUEUE_FULL_NO_DEADLOCK ===============
+============================================================
+Starting server on port 9564
+[DEBUG] Affinity set for PID 65854 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+===================== TEST: MEGA_LOCKS =====================
+============================================================
+Starting server on port 8707
+[DEBUG] Affinity set for PID 65883 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+================== TEST: WRITER_PROGRESS ===================
+============================================================
+Starting server on port 7653
+[DEBUG] Affinity set for PID 67032 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+===================== TEST: FIFO_WEAK ======================
+============================================================
+Starting server on port 8144
+[DEBUG] Affinity set for PID 67128 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+========== TEST: WRITER_PRIORITY_UNDER_POST_FLOOD ==========
+============================================================
+Starting server on port 7706
+[DEBUG] Affinity set for PID 67132 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+============ TEST: ERROR_COUNTERS_NO_INCREMENT =============
+============================================================
+Starting server on port 5443
+[DEBUG] Affinity set for PID 67233 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+================ TEST: DEBUG_SLEEP_ENFORCED ================
+============================================================
+Starting server on port 6632
+[DEBUG] Affinity set for PID 67237 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+========== TEST: LOG_FORMAT_MATCHES_APPEND_STATS ===========
+============================================================
+Starting server on port 6210
+[DEBUG] Affinity set for PID 67241 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+================ TEST: BUSY_WAIT_CPU_PROBE =================
+============================================================
+Starting server on port 6495
+[DEBUG] Affinity set for PID 67246 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+=============== TEST: CPU_IDLE_NO_BUSY_WAIT ================
+============================================================
+Starting server on port 6889
+[DEBUG] Affinity set for PID 67281 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+=========== TEST: DEBUG_SLEEP_AFFECTS_LOG_STATS ============
+============================================================
+Starting server on port 6424
+[DEBUG] Affinity set for PID 67316 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+======== TEST: ERROR_403_COUNTERS_NO_INCREMENT_DIR =========
+============================================================
+Starting server on port 6757
+[DEBUG] Affinity set for PID 67327 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+============== TEST: QUEUE_FULL_MASTER_BLOCKS ==============
+============================================================
+Starting server on port 6572
+[DEBUG] Affinity set for PID 67331 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+================= TEST: FIFO_ORDER_STRONG ==================
+============================================================
+Starting server on port 5430
+[DEBUG] Affinity set for PID 67339 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+======= TEST: QUEUE_LOCK_RELEASED_DURING_PROCESSING ========
+============================================================
+Starting server on port 9810
+[DEBUG] Affinity set for PID 67404 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+=============== TEST: STAT_TIME_FORMAT_EXACT ===============
+============================================================
+Starting server on port 5538
+[DEBUG] Affinity set for PID 67421 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+========== TEST: POST_BODY_EXCLUDES_CURRENT_POST ===========
+============================================================
+Starting server on port 6796
+[DEBUG] Affinity set for PID 67425 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+========= TEST: DYNAMIC_COUNTER_INCREMENTS_ON_CGI ==========
+============================================================
+Starting server on port 7695
+[DEBUG] Affinity set for PID 67431 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+================ TEST: POST_BEFORE_ANY_GET =================
+============================================================
+Starting server on port 7348
+[DEBUG] Affinity set for PID 67436 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+============= TEST: DEBUG_SLEEP_ENFORCED_POST ==============
+============================================================
+Starting server on port 5618
+[DEBUG] Affinity set for PID 67441 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+=========== TEST: DEBUG_SLEEP_READERS_CONCURRENT ===========
+============================================================
+Starting server on port 8803
+[DEBUG] Affinity set for PID 67445 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+================== TEST: THREAD_ID_RANGE ===================
+============================================================
+Starting server on port 9233
+[DEBUG] Affinity set for PID 67458 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+========= TEST: WRITER_PRIORITY_UNDER_READER_FLOOD =========
+============================================================
+Starting server on port 5904
+[DEBUG] Affinity set for PID 67464 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+======== TEST: FIFO_BY_DISPATCH_TIMES_SINGLE_WORKER ========
+============================================================
+Starting server on port 9026
+[DEBUG] Affinity set for PID 67481 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+====== TEST: POST_BODY_CONTAINS_MULTIPLE_LOG_ENTRIES =======
+============================================================
+Starting server on port 9495
+[DEBUG] Affinity set for PID 67497 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+========== TEST: WRITER_PRIORITY_NO_READER_BARGE ===========
+============================================================
+Starting server on port 5899
+[DEBUG] Affinity set for PID 67503 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+========== TEST: QUEUE_COUNTS_ACTIVE_PLUS_PENDING ==========
+============================================================
+Starting server on port 5241
+[DEBUG] Affinity set for PID 67510 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+============== TEST: STATS_TIME_MONOTONICITY ===============
+============================================================
+Starting server on port 8773
+[DEBUG] Affinity set for PID 67533 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+======= TEST: ERROR_DOES_NOT_INCREMENT_TYPE_COUNTERS =======
+============================================================
+Starting server on port 5068
+[DEBUG] Affinity set for PID 67538 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+============= TEST: POST_BLOCKS_BEHIND_WRITER ==============
+============================================================
+Starting server on port 5005
+[DEBUG] Affinity set for PID 67542 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+=============== TEST: MIXED_LOAD_NO_DEADLOCK ===============
+============================================================
+Starting server on port 8941
+[DEBUG] Affinity set for PID 67549 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+============ TEST: LARGE_LOG_POST_NOT_TRUNCATED ============
+============================================================
+Starting server on port 7856
+[DEBUG] Affinity set for PID 67600 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+=========== TEST: WORKER_WAKEUP_FROM_EMPTY_QUEUE ===========
+============================================================
+Starting server on port 8674
+[DEBUG] Affinity set for PID 67611 to cores {0, 1, 2, 3, 4, 5, 6}
+
+============================================================
+============ TEST: STRESS_MIXED_200_NO_DEADLOCK ============
+============================================================
+Starting server on port 9221
+[DEBUG] Affinity set for PID 67619 to cores {0, 1, 2, 3, 4, 5, 6}
