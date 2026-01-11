@@ -133,7 +133,7 @@ void add_to_log(server_log log, const char* data, int data_len, time_stats* tm_s
     pthread_mutex_unlock(&log->mutex);
     gettimeofday(&tm_stats->log_exit, NULL);
 
-    struct Log_item* item = (struct log_item*)malloc(sizeof(struct Log_item));
+    struct Log_item* item = (struct Log_item*)malloc(sizeof(struct Log_item));
     item->data = (char*) malloc(data_len + 1);
     memcpy(item->data,data,data_len);
     item->data[data_len] = '\0';
