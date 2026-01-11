@@ -26,6 +26,7 @@ typedef struct{
     int* workingRequests;
     int id;
     server_log log;
+    threads_stats t;
 } thread_args;
 
 
@@ -79,14 +80,8 @@ void* workerThread(void* arg) {
     int* wr = args->workingRequests;
     int id = args->id;
     server_log log =  args->log;
+    threads_stats stats_t = (threads_stats)args->t;
     free(arg);
-
-    threads_stats t = malloc(sizeof(struct Threads_stats));
-    t->id = id;
-    t->stat_req = 0;
-    t->dynm_req = 0;
-    t->post_req = 0;
-    t->total_req = 0;
     
     while(1){
         pthread_mutex_lock(&mutex);
@@ -105,7 +100,7 @@ void* workerThread(void* arg) {
         pthread_mutex_unlock(&mutex);
 
         
-        requestHandle(job->connfd, timeStats, t, log);
+        requestHandle(job->connfd, timeStats, stats_t, log);
 
         pthread_mutex_lock(&mutex);
         Close(job->connfd);
@@ -154,10 +149,22 @@ int main(int argc, char *argv[])
             fprintf(stderr, "malloc failed");
             exit(1);
         }
+        threads_stats stats = (threads_stats)malloc(sizeof(struct Threads_stats));
+        if(stats == NULL){
+        fprintf(stderr, "malloc failed");
+        exit(1);
+        }
+        stats->id = i + 1;             // Thread ID (placeholder)
+        stats->stat_req = 0;       // Static request count
+        stats->dynm_req = 0;       // Dynamic request count
+        stats->post_req = 0;        // Post request count
+        stats->total_req = 0;      // Total request count
         args->queue = &queue;
         args->id = id;
         args->workingRequests = &workingRequest;
         args->log = request_log;
+        
+        args->t = stats;
         pthread_create(&workerHandles[i], NULL, workerThread, (void*)args);
     }
 
