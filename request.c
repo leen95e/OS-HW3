@@ -2,11 +2,9 @@
 #include "request.h"
 
 
-
-
 int append_stats(char* buf, threads_stats t_stats, time_stats tm_stats) {
     int offset = strlen(buf);
-
+  
     offset += sprintf(buf + offset, "Stat-Req-Arrival:: %ld.%06ld\r\n",
                       tm_stats.task_arrival.tv_sec, tm_stats.task_arrival.tv_usec);
     offset += sprintf(buf + offset, "Stat-Req-Dispatch:: %ld.%06ld\r\n",
@@ -28,6 +26,7 @@ void requestError(int fd, char *cause, char *errnum, char *shortmsg, char *longm
 {
     char buf[MAXLINE], body[MAXBUF];
 
+    
     // Safely build the body content
     sprintf(body, "<html><title>OS-HW3 Error</title>");
     sprintf(body + strlen(body), "<body bgcolor=\"fffff\">\r\n");
@@ -180,17 +179,17 @@ void requestHandle(int fd, time_stats tm_stats, threads_stats t_stats, server_lo
             sprintf(resp_headers, "HTTP/1.0 200 OK\r\n");
             sprintf(resp_headers + strlen(resp_headers), "Server: OS-HW3 Web Server\r\n");
         }
-        gettimeofday(&tm_stats.log_enter, NULL);
         char log_entry[MAXBUF] = {0};
         int entry_len = append_stats(log_entry, t_stats, tm_stats);
-        add_to_log(log, log_entry, entry_len);
-        gettimeofday(&tm_stats.log_exit, NULL);
+
+        add_to_log(log, log_entry, entry_len, &tm_stats);
+        
     } else if (strcasecmp(method, "POST") == 0) {
         t_stats->post_req++;
         requestReadhdrs(&rio);
-        gettimeofday(&tm_stats.log_enter, NULL);
-        body_len = get_log(log, (char**)&body_content);
-        gettimeofday(&tm_stats.log_exit, NULL);
+
+        body_len = get_log(log, (char**)&body_content, &tm_stats);
+
         sprintf(resp_headers, "HTTP/1.0 200 OK\r\n");
         sprintf(resp_headers + strlen(resp_headers), "Server: OS-HW3 Web Server\r\n");
         sprintf(resp_headers + strlen(resp_headers), "Content-Length: %d\r\n", body_len);

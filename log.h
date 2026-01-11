@@ -10,7 +10,18 @@
 // - Use appropriate synchronization primitives (e.g., pthread mutexes and condition variables).
 // - The log should allow appending entries and returning the full log content.
 
+#include <sys/time.h>
+
 typedef struct Server_Log* server_log;
+
+typedef struct log_item log_item;
+
+typedef struct Time_stats {
+    struct timeval task_arrival;
+    struct timeval task_dispatch;
+    struct timeval log_enter;
+    struct timeval log_exit;
+} time_stats;
 
 // Creates a new server log instance
 server_log create_log();
@@ -20,9 +31,9 @@ void destroy_log(server_log log);
 
 // Returns the log contents as a string (null-terminated)
 // NOTE: caller is responsible for freeing dst
-int get_log(server_log log, char** dst);
+int get_log(server_log log, char** dst, time_stats* tm_stats);
 
 // Appends a new entry to the log
-void add_to_log(server_log log, const char* data, int data_len);
+void add_to_log(server_log log, const char* data, int data_len, time_stats* tm_stats);
 
 #endif // SERVER_LOG_H
