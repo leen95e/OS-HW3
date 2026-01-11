@@ -1,6 +1,6 @@
 #include "segel.h"
 #include "request.h"
-
+#include "log.h"
 
 int append_stats(char* buf, threads_stats t_stats, time_stats tm_stats) {
     int offset = strlen(buf);
